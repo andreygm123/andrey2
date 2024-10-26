@@ -34,6 +34,12 @@ $resultado = $conexion->query($sql);
         <li class="nav-item">
             <a class="nav-link active" href="http://localhost/andrey2/ingresaproducto.php">Insertar producto</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="http://localhost/andrey2/deleteproducto.php">Borrar producto</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="http://localhost/andrey2/actualizar.php?id_producto=2">Actualizar producto</a>
+        </li>
     </ul>
 </div>
     <h1>Lista de los productos</h1>
@@ -64,14 +70,15 @@ $resultado = $conexion->query($sql);
                     <td>' . $fila['valor_venta'] . '</td>
                     <td>' . $fila['fecha_ulti_venta'] . '</td>
                     <td> 
-                        <button class="btn btn-danger btn-sm">
-                            <img src="img/delete.png" alt="Eliminar" width="16" height="16">
-                        </button>
-                        <button class="btn btn-info btn-sm">
-                            <img src="img/edit.png" alt="Editar" width="16" height="16">
-                        </button>
-                    </td>
-                  </tr>';
+                        <a href="deleteproducto.php?id=' . $fila['id_producto'] . '" class="btn btn-danger btn-sm" onclick="return confirm(\'¿Estás seguro de que deseas eliminar este producto?\');"> 
+                        <img src="img/delete.png" alt="Eliminar">
+                        </a>
+
+                    <a href="actualizar.php?id=' . $fila['id_producto'] . '" class="btn btn-primary btn-sm">
+                        <img src="img/edit.png" alt="Editar">
+                    </a>
+                </td>
+              </tr>';
         }
         echo '</tbody></table>';
     } else {

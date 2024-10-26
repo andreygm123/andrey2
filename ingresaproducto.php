@@ -11,20 +11,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $sql = "INSERT INTO tbl_producto (nombre_producto, existencia, id_medida, id_vendedor, valor_venta, fecha_ulti_venta) 
     VALUES ('$nombre_producto','$existencia','$id_medida','$id_vendedor','$valor_venta','$fecha_ulti_venta')";
 
-    if ($conexion->query($sql) === TRUE) {
-        //echo "Carrera insertada exitosamente";
-        echo '<script>
-        window.onload = function() {
-            swal("¡Producto!", "Producto insertada exitosamente", "success");
-        };
+if ($conexion->query($sql) === TRUE) {
+    echo '<script>
+    window.onload = function() {
+        swal("¡Producto!", "Producto insertado exitosamente", "success");
+    };
     </script>';
-    } else {
-        echo '<script>
-        window.onload = function() {
-            swal("¡Producto!", "Producto no insertado", "error");
-        };
+} else {
+    echo '<script>
+    window.onload = function() {
+        swal("¡Producto!", "Producto no insertado", "error");
+    };
     </script>';
-    }
+}
 }
 
 $conexion->close();
@@ -45,6 +44,7 @@ $carrera = $conexion->query($sql);
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <link rel="stylesheet" href="productos.css">
     <title>Insertar Producto</title>
 </head>
@@ -57,7 +57,14 @@ $carrera = $conexion->query($sql);
         <li class="nav-item">
             <a class="nav-link active" href="http://localhost/andrey2/ingresaproducto.php">Insertar producto</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="http://localhost/andrey2/deleteproducto.php">Borrar producto</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="http://localhost/andrey2/actualizar.php?id_producto=2">Actualizar producto</a>
+        </li>
     </ul>
+</div>
 </div> 
     <div class="container mt-5">
         <h1 class="text-center">Insertar Producto</h1>
