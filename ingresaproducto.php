@@ -13,17 +13,27 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 if ($conexion->query($sql) === TRUE) {
     echo '<script>
-    window.onload = function() {
-        swal("¡Producto!", "Producto insertado exitosamente", "success");
-    };
-    </script>';
-} else {
-    echo '<script>
-    window.onload = function() {
-        swal("¡Producto!", "Producto no insertado", "error");
-    };
-    </script>';
-}
+        window.onload = function() {
+            Swal.fire({
+                title: "¡Buen trabajo!",
+                text: "!Producto insertado exitosamente!",
+                icon: "success"
+
+            });
+        };
+        </script>';
+          } else {
+          echo '<script>
+        window.onload = function() {
+            Swal.fire({
+                title: "¡Error!",
+                text: "No se pudo eliminar el producto.",
+                icon: "error"
+            });
+        };
+        </script>';
+    
+    }
 }
 
 $conexion->close();
@@ -44,7 +54,7 @@ $carrera = $conexion->query($sql);
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.min.css"rel="stylesheet">
     <link rel="stylesheet" href="productos.css">
     <title>Insertar Producto</title>
 </head>
@@ -56,12 +66,6 @@ $carrera = $conexion->query($sql);
         </li>
         <li class="nav-item">
             <a class="nav-link active" href="http://localhost/andrey2/ingresaproducto.php">Insertar producto</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/andrey2/deleteproducto.php">Borrar producto</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/andrey2/actualizar.php?id_producto=2">Actualizar producto</a>
         </li>
     </ul>
 </div>
@@ -123,6 +127,6 @@ $carrera = $conexion->query($sql);
     </div>
 
     <!-- SweetAlert2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.all.min.js"></script>
 </body>
 </html>

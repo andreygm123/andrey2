@@ -34,12 +34,7 @@ $resultado = $conexion->query($sql);
         <li class="nav-item">
             <a class="nav-link active" href="http://localhost/andrey2/ingresaproducto.php">Insertar producto</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/andrey2/deleteproducto.php">Borrar producto</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link active" href="http://localhost/andrey2/actualizar.php?id_producto=2">Actualizar producto</a>
-        </li>
+
     </ul>
 </div>
     <h1>Lista de los productos</h1>

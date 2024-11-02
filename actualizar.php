@@ -13,17 +13,25 @@ if (isset($_POST['actualizar'])) {
     if ($conexion->query($sql) === TRUE) {
         echo '<script>
         window.onload = function() {
-            console.log("Actualización exitosa, mostrando sweetalert");
-            swal("¡Producto!", "Producto actualizado exitosamente", "success");
+            Swal.fire({
+                title: "¡Buen trabajo!",
+                text: "!Producto insertado exitosamente!",
+                icon: "success"
+
+            });
         };
         </script>';
-    } else {
-        echo '<script>
+          } else {
+          echo '<script>
         window.onload = function() {
-            console.error("Error al actualizar: ' . $conexion->error . '");
-            swal("¡Producto!", "Producto no actualizado", "error");
+            Swal.fire({
+                title: "¡Error!",
+                text: "No se pudo eliminar el producto.",
+                icon: "error"
+            });
         };
         </script>';
+    
     }
 }
 
@@ -45,7 +53,7 @@ if (isset($_GET['id_producto'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.min.css"rel="stylesheet">
     <link rel="stylesheet" href="productos.css">
     <title>Actualizar Producto</title>
 </head>
@@ -59,13 +67,6 @@ if (isset($_GET['id_producto'])) {
         <li class="nav-item">
             <a class="nav-link active" href="http://localhost/andrey2/ingresaproducto.php">Insertar producto</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/andrey2/deleteproducto.php">Borrar producto</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="http://localhost/andrey2/actualizar.php?id_producto=2">Actualizar producto</a>
-        </li>
-    </ul>
 </div> 
 
 <div class="container mt-5">
@@ -96,11 +97,13 @@ if ($fecha_ulti_venta) {
         <label for="fecha_ulti_venta" class="form-label">Fecha Última Venta:</label>
         <input type="date" class="form-control" id="fecha_ulti_venta" name="fecha_ulti_venta" required value="<?php echo htmlspecialchars($fecha_ulti_venta_formateada); ?>">
         </div>
->
+
         <button type="submit" name="actualizar" class="btn btn-primary">Actualizar Producto</button>
     </form>
     </div>
-
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.all.min.js"></script>
 </body>
 </html>
 <?php
