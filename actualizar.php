@@ -1,3 +1,4 @@
+
 <?php
 include 'conexionProducto.php';
 
@@ -6,19 +7,20 @@ if (isset($_POST['actualizar'])) {
     $nombre_producto = $_POST['nombre_producto'];
     $existencia = $_POST['existencia'];
     $fecha_ulti_venta = $_POST['fecha_ulti_venta'];
-
-  
+    echo $fecha_ulti_venta;
     $sql = "UPDATE tbl_producto SET nombre_producto = '$nombre_producto', existencia = '$existencia', fecha_ulti_venta = '$fecha_ulti_venta' WHERE id_producto = '$id_producto'";
 
     if ($conexion->query($sql) === TRUE) {
         echo '<script>
         window.onload = function() {
-            swal("¡Producto!", "Producto actualizado", "success");
+            console.log("Actualización exitosa, mostrando sweetalert");
+            swal("¡Producto!", "Producto actualizado exitosamente", "success");
         };
         </script>';
     } else {
         echo '<script>
         window.onload = function() {
+            console.error("Error al actualizar: ' . $conexion->error . '");
             swal("¡Producto!", "Producto no actualizado", "error");
         };
         </script>';
@@ -48,6 +50,7 @@ if (isset($_GET['id_producto'])) {
     <title>Actualizar Producto</title>
 </head>
 <body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <div class="navegacion">
     <ul class="nav nav-pills">
         <li class="nav-item">
@@ -77,14 +80,27 @@ if (isset($_GET['id_producto'])) {
             <label for="existencia" class="form-label">Existencia:</label>
             <input type="number" class="form-control" id="existencia" name="existencia" required value="<?php echo htmlspecialchars($fila['existencia']); ?>">
         </div>
-            <div class="mb-3">
-            <label for="fecha_ulti_venta" class="form-label">Fecha Última Venta:</label>
-            <input type="date" class="form-control" id="fecha_ulti_venta" name="fecha_ulti_venta" required value="<?php echo htmlspecialchars($fila['fecha_ulti_venta']); ?>">
+        
+
+<?php
+$fecha_ulti_venta = DateTime::createFromFormat('d-m-Y', $fila['fecha_ulti_venta']);
+if ($fecha_ulti_venta) {
+    $fecha_ulti_venta_formateada = $fecha_ulti_venta->format('Y-m-d');
+} else {
+
+    $fecha_ulti_venta_formateada = '';
+}
+?>
+
+        <div class="mb-3">
+        <label for="fecha_ulti_venta" class="form-label">Fecha Última Venta:</label>
+        <input type="date" class="form-control" id="fecha_ulti_venta" name="fecha_ulti_venta" required value="<?php echo htmlspecialchars($fecha_ulti_venta_formateada); ?>">
         </div>
+>
         <button type="submit" name="actualizar" class="btn btn-primary">Actualizar Producto</button>
     </form>
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
 </body>
 </html>
 <?php
