@@ -1,3 +1,52 @@
+<?php
+session_start();
+include 'conexionProducto.php';
+
+if ($_SERVER['REQUEST_METHOD']=== 'POST') {
+    $username = $_POST['username'];
+    $contraseña = $_POST['contraseña'];
+    /*prepare consulta*/
+    $stmt = $conexion->prepare("SELECT id_usuario, contraseña FROM tbl_usuarios WHERE username = ?");
+
+    /*asocio valores*/
+    $stmt->bind_param("s" , $username);
+
+    /*ejecuto consulta*/
+    $stmt->execute();
+
+    /*obtengo el resulado*/
+    $stmt->store_result();
+
+
+    if($stmt ->num_rows > 0){
+        /*obtengo el id del usuaro*/
+        $stmt->bind_result($id_usuario, $hashed_password);
+        $stmt->fetch();
+
+        /*verifico la contraseña*/
+        if(password_verify($password, $hashed_password)){
+            $_SESSION['id_usuario'] = $id_usuario;
+            $_SESSION['username'] = $username;
+            header("Location: productos.php");
+            exit();
+        }else {
+            echo "Contaseña incorrecta.";
+        }
+    }else {
+       echo "Usuario no encontrado"
+       
+           ;
+    }
+
+    $stmt->close();
+    $conexion->close();
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,10 +89,10 @@
 </head>
 <body>
 
-    <form>
+    <form  action="login.php" method="POST">
         <h2>Iniciar Sesión</h2>
-        <input type="text" placeholder="Usuario" required>
-        <input type="password" placeholder="Contraseña" required>
+        <input type="text" name="username" placeholder="username" required>
+        <input type="password" name="contraseña" placeholder="contraseña" required>
         <button type="submit">Ingresar</button>
     </form>
 

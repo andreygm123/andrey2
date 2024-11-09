@@ -1,8 +1,15 @@
 <?php
 include 'conexionProducto.php';
-$username = "AndreyG";
-$contraseña = "ela43715";
-$correo_electronico = "andrey56@gmail.com";
+if ($_SERVER['REQUEST_METHOD']=== 'POST'){
+    $username = $_POST ['username'];
+    $contraseña = $_POST['contraseña'];
+    $correo_electronico = $_POST['correo_electronico'];
+
+    $sql = "INSERT INTO tbl_usuario (id_usuario, contraseña, correo_electronico) 
+    VALUES ('$id_usuario','$contraseña','$correo_electronico','$id_vendedor','$valor_venta','$fecha_ulti_venta')";
+
+}
+
 
 $cifrado = password_hash($password,PASSWORD_DEFAULT);
 
@@ -20,7 +27,23 @@ $conexion->close();
 ?>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form  action="login.php" method="POST">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" name="username" placeholder="username" required>
+        <input type="password" name="contraseña" placeholder="contraseña" required>
+        <button type="submit">Ingresar</button>
+    </form>
 
+</body>
+</html>
 
 
 
