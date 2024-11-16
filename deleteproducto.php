@@ -7,30 +7,30 @@ if (isset($_GET['id_producto'])) {
 
     if ($conexion->query($sql) === TRUE) {
         echo '<script>
-        window.onload = function() {
-            Swal.fire({
-                title: "¡Buen trabajo!",
-                text: "!Producto insertado exitosamente!",
-                icon: "success"
-
-            });
-        };
-        </script>';
-        header('Location: productos.php');
-        exit();
-          } else {
-          echo '<script>
-        window.onload = function() {
-            Swal.fire({
-                title: "¡Error!",
-                text: "No se pudo eliminar el producto.",
-                icon: "error"
-            });
-        };
-        </script>';
-    
-
-}
+                window.onload = function() {
+                    Swal.fire({
+                        title: "¡Buen trabajo!",
+                        text: "¡Producto eliminado exitosamente!",
+                        icon: "success"
+                    }).then(function() {
+                        window.location = "productos.php";
+                    });
+                };
+              </script>';
+    } else {
+        
+        echo '<script>
+                window.onload = function() {
+                    Swal.fire({
+                        title: "¡Error!",
+                        text: "No se elimino el producto.",
+                        icon: "error"
+                    }).then(function() {
+                        window.location = "productos.php"; 
+                    });
+                };
+              </script>';
+    }
 }
 
 

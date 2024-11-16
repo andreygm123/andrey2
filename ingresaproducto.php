@@ -23,7 +23,7 @@ if ($conexion->query($sql) === TRUE) {
         };
         </script>';
           } else {
-          echo '<script>
+          echo '<script><p
         window.onload = function() {
             Swal.fire({
                 title: "¡Error!",
@@ -126,7 +126,7 @@ $carrera = $conexion->query($sql);
         </form>
     </div>
 
-    <!-- SweetAlert2 JS -->
+   
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.all.min.js"></script>
 </body>
 </html>

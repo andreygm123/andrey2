@@ -65,11 +65,11 @@ $resultado = $conexion->query($sql);
                     <td>' . $fila['valor_venta'] . '</td>
                     <td>' . $fila['fecha_ulti_venta'] . '</td>
                     <td> 
-                        <a href="deleteproducto.php?id_producto=' . $fila['id_producto'] . '" class="btn btn-danger btn-sm" onclick="return confirm(\'¿Estás seguro de que deseas eliminar este producto?\');"> 
+                        <a href="deleteproducto.php?id_producto=' . $fila['id_producto'] . '" class="btn btn-danger btn-sm btn-custom" onclick="return confirm(\'¿Estás seguro de que deseas eliminar este producto?\');" > 
                         <img src="img/delete.png" alt="Eliminar">
                         </a>
 
-                    <a href="actualizar.php?id_producto=' . $fila['id_producto'] . '" class="btn btn-primary btn-sm">
+                    <a href="actualizar.php?id_producto=' . $fila['id_producto'] . '" class="btn btn-primary btn-sm btn-custom">
                         <img src="img/edit.png" alt="Editar">
                     </a>
                 </td>
